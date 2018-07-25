@@ -1,0 +1,28 @@
+<?php
+
+use Ahsan\Neo4j\Schema\Blueprint;
+use Ahsan\Neo4j\Migrations\Migration;
+
+class DummyClass extends Migration {
+
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        //
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        //
+    }
+
+}

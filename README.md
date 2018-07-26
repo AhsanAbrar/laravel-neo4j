@@ -1,2 +1,2 @@
 # Laravel-Neo4j
-Laravel eloquent wrapper for Neo4j graph database.
+Laravel wrapper for Neo4j graph database.

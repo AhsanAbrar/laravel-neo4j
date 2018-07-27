@@ -34,16 +34,5 @@ class Neo4jServiceProvider extends ServiceProvider {
         $this->app->singleton('redis', function ($app) {
             return new Cypher();
         });
-
-        $this->app->resolving(function($app){
-            if (class_exists('Illuminate\Foundation\AliasLoader')) {
-                $loader = \Illuminate\Foundation\AliasLoader::getInstance();
-                $loader->alias('NeoEloquent', 'Ahsan\Neo4j\Eloquent\Model');
-                $loader->alias('Neo4jSchema', 'Ahsan\Neo4j\Facade\Neo4jSchema');
-            }
-        });
-
-
-        $this->registerComponents();
     }
 }

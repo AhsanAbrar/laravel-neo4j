@@ -29,4 +29,17 @@ return [
 Cypher::create('User', ['name' => 'Ahsan']);
 ```
 
-return current created instance with model
+## Insert Multiple Records
+
+```
+Cypher::insert('User', [
+    [
+        'name' => 'Ahsan'
+    ],
+    [
+        'name' => 'Abrar'
+    ]
+]);
+```
+
+return true when successful.

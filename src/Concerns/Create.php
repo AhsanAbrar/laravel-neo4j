@@ -47,7 +47,7 @@ trait Create
 		}
 
 		$result = $this->query($this->insertStatement(), [
-			'props' => $records)
+			'props' => $records
 		]);
 
 		return true;

@@ -2,10 +2,13 @@
 
 namespace Ahsan\Neo4j;
 
+use Illuminate\Database\Eloquent\Collection;
+
 class Cypher
 {
 	use Concerns\Connection,
-		Concerns\Create;
+		Concerns\Create,
+		Concerns\Relation;
 
 	/**
 	 * Current Model
@@ -35,17 +38,19 @@ class Cypher
 		return $this->model = (new $class())->newFromBuilder($attributes);
 	}
 
-	public function get()
+	public function get($result)
 	{
+		$class = 'App\\' . $this->table;
 		$models = [];
 
-		if (count($this->resultSet) == 0)
+		if (!$result->getRecords())
 			return Collection::make($models);
 
-		foreach ($this->resultSet as $row) {
-			$attributes = $row['t']->getProperties();
-			$model = $this->model->newFromBuilder($attributes);
-			$models[] = $model;
+		foreach ($result->getRecords() as $record) {
+			$attributes = $record->values()[0]->values();
+			$attributes['id'] = $record->values()[0]->identity();
+
+			$models[] = $this->model = (new $class())->newFromBuilder($attributes);
 		}
 
 		return Collection::make($models);

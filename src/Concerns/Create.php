@@ -19,7 +19,7 @@ trait Create
 		$this->table = $table;
 
 		$result = $this->query($this->createStatement(), [
-			'data' => array_merge($attributes, $this->getTimestamps())
+			'props' => array_merge($attributes, $this->getTimestamps())
 		]);
 
 		return $this->first($result);
@@ -30,7 +30,39 @@ trait Create
 	 */
 	public function createStatement()
 	{
-		return 'CREATE (n:' . $this->table . ') SET n += {data} return n';
+		return 'CREATE (n:' . $this->table . ') SET n += {props} return n';
+	}
+
+	/**
+	 * Insert Multiple Items
+	 */
+	public function insert($table, $attributes)
+	{
+		$this->table = $table;
+
+		$records = [];
+
+		foreach ($attributes as $row) {
+			$records[] = array_merge($row, $this->getTimestamps());
+		}
+
+		$result = $this->query($this->insertStatement(), [
+			'props' => $records)
+		]);
+
+		return true;
+	}
+
+	/**
+	 * Create single item
+	 */
+	public function insertStatement()
+	{
+		return 'UNWIND {props} as map
+CREATE (n:' . $this->table . ')
+SET n = map';
+
+		return 'CREATE (n:' . $this->table . ') SET n += {props} return n';
 	}
 
 	/**

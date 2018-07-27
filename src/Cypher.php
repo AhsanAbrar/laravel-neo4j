@@ -2,9 +2,20 @@
 
 namespace Ahsan\Neo4j;
 
-abstract class Cypher
+use GraphAware\Neo4j\Client\ClientBuilder;
+use Illuminate\Config\Repository as Config;
+
+class Cypher
 {
-	use Concerns\Connection;
+	/**
+	 * The Neo4j Graphaware Client
+	 */
+	protected $client;
+
+	/**
+	 * Configurations
+	 */
+	protected $config;
 
 	/**
 	 * Current Model
@@ -12,11 +23,32 @@ abstract class Cypher
 	protected $model;
 
 	/**
+	 * Constructor()
+	 */
+	function __construct(Config $config)
+	{
+		$this->config = $config;
+
+		$this->setClient();
+	}
+
+	/**
+	 * Set Client First
+	 */
+	public function setClient()
+	{
+		$this->client = ClientBuilder::create()
+			->addConnection($this->config->get('app.name'), 'http://neo4j:root@localhost:7474')
+			//->addConnection('bolt', 'bolt://neo4j:root@localhost:7687')
+			->build();
+	}
+
+	/**
 	 * neo4j query
 	 */
-	public function query($queryString, $param = [])
+	public function query($queryString)
 	{
-		return $this->client->run($queryString, $param);
+		return $this->client->run($queryString);
 	}
 
 	public function first()

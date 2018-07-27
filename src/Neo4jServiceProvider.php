@@ -31,7 +31,7 @@ class Neo4jServiceProvider extends ServiceProvider {
      */
     public function register()
     {
-        $this->app->singleton('redis', function ($app) {
+        $this->app->singleton('cypher', function ($app) {
             return new Cypher();
         });
     }

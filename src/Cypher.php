@@ -30,7 +30,7 @@ class Cypher
 		$class = 'App\\' . $this->table;
 
 		$attributes = $result->getRecord()->values()[0]->values();
-		$attributes['identity'] = $result->getRecord()->values()[0]->identity();
+		$attributes['id'] = $result->getRecord()->values()[0]->identity();
 
 		return $this->model = (new $class())->newFromBuilder($attributes);
 	}

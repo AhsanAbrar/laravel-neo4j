@@ -43,3 +43,11 @@ Cypher::insert('User', [
 ```
 
 return true when successful.
+
+## Delete Single Node with Identity
+
+```
+Cypher::delete('User', 1209);
+```
+
+return true when successful.

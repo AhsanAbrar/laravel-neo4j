@@ -7,11 +7,6 @@ use Carbon\Carbon;
 trait Create
 {
 	/**
-	 * The Neo4j Current Node Label
-	 */
-	protected $table;
-
-	/**
 	 * Create single item
 	 */
 	public function create($table, $attributes)

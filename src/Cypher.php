@@ -13,6 +13,11 @@ class Cypher
 	protected $model;
 
 	/**
+	 * The Neo4j Current Node Label
+	 */
+	protected $table;
+
+	/**
 	 * neo4j query
 	 */
 	public function query($queryString, $param = [])

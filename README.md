@@ -51,9 +51,3 @@ Cypher::delete('User', 1209);
 ```
 
 return true when successful.
-
-## BelongsTo Relation
-```
-Cypher::belongsTo('Item', 'RELATION_NAME', 'Category');
-```
-return eloquent collection

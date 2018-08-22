@@ -23,31 +23,12 @@ return [
 ];
 ```
 
-## Create Record
+## Run Cypher Query
 
 ```
-Cypher::create('User', ['name' => 'Ahsan']);
+use Ahsan\Neo4j\Facade\Cypher;
+
+Cypher::run("MATCH (n) RETURN n");
 ```
 
-## Insert Multiple Records
-
-```
-Cypher::insert('User', [
-    [
-        'name' => 'Ahsan'
-    ],
-    [
-        'name' => 'Abrar'
-    ]
-]);
-```
-
-return true when successful.
-
-## Delete Single Node with Identity
-
-```
-Cypher::delete('User', 1209);
-```
-
-return true when successful.
+return Graphaware results
